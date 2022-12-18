@@ -48,9 +48,13 @@ tasksEl.addEventListener('click', (event) => {
 function renderTasks() {
     tasksEl.innerHTML = ''
 
-    const list = getFromLS();
 
-    if (list.length === 0) { tasksEl.innerHTML = '<hr>'; localStorage.setItem('taskList', JSON.stringify([])) }
+    let list = getFromLS()
+
+
+    if (list === null) { tasksEl.innerHTML = '<hr>'; localStorage.setItem('taskList', JSON.stringify([])); }
+
+    list = getFromLS();
     for (obj of list) {
         tasksEl.innerHTML += `
             <div class="task" taskid = "${obj.id}" >
@@ -64,6 +68,7 @@ function renderTasks() {
         `
     }
 }
+
 
 function addToLS(task) {
     const list = getFromLS()
